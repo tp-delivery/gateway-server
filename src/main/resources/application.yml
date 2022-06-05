@@ -4,3 +4,21 @@ spring:
   cloud:
     config:
       name: gateway-server
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway GlobalFilter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: shop-service
+          uri: lb://SHOP-SERVICE
+          predicates:
+            - Path=/shop-service/**
+          filters:
+            - RewritePath=/shop-service/(?<segment>.*), /$\{segment}
+
+
+
+
