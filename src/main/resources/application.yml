@@ -18,7 +18,11 @@ spring:
             - Path=/shop-service/**
           filters:
             - RewritePath=/shop-service/(?<segment>.*), /$\{segment}
-
-
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
 
 
